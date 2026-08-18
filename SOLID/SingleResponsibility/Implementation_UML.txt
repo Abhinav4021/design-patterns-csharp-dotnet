@@ -1,0 +1,69 @@
+                         ┌──────────────────────────────┐
+                         │            Order             │
+                         │            «record»          │
+                         │──────────────────────────────│
+                         │ + Id: int                    │
+                         │ + CustomerName: string       │
+                         │ + Items: List<OrderItem>     │
+                         └──────────────┬───────────────┘
+                                        │
+                                        │ contains
+                                        ▼
+                         ┌──────────────────────────────┐
+                         │          OrderItem           │
+                         │            «record»          │
+                         │──────────────────────────────│
+                         │ + Name: string               │
+                         │ + Price: decimal             │
+                         │ + Quantity: int              │
+                         └──────────────────────────────┘
+
+
+            ┌─────────────────────┐
+            │   OrderCalculator   │
+            │─────────────────────│
+            │ + CalculateTotal(   │
+            │     order): decimal │
+            └──────────┬──────────┘
+                       │
+                       │ calculates
+                       ▼
+                    Order
+
+
+            ┌─────────────────────┐
+            │   OrderRepository   │
+            │─────────────────────│
+            │ + Save(order): void │
+            └──────────┬──────────┘
+                       │
+                       │ persists
+                       ▼
+                    Order
+
+
+            ┌────────────────────────────┐
+            │ OrderNotificationService   │
+            │────────────────────────────│
+            │ + SendConfirmation(        │
+            │     order, total): void    │
+            └────────────┬───────────────┘
+                         │
+                         │ notifies
+                         ▼
+                      Customer
+
+
+                         ┌──────────────────────┐
+                         │        Program       │
+                         │       «Client»       │
+                         │──────────────────────│
+                         │ + Main(): void       │
+                         └──────────┬───────────┘
+                                    │
+                                    │ coordinates
+                                    ▼
+                    ┌───────────────┼────────────────┐
+                    │               │                │
+                    ▼               ▼                ▼
+             OrderCalculator  OrderRepository  NotificationService
