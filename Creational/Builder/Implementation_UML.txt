@@ -1,0 +1,92 @@
+             ┌──────────────────────────────────────┐
+             │          IComputerBuilder            │
+             │              «interface»             │
+             │──────────────────────────────────────│
+             │ + SetCPU(cpu: string):               │
+             │       IComputerBuilder               │
+             │ + SetRAM(ramInGb: int):              │
+             │       IComputerBuilder               │
+             │ + SetStorage(storageInGb: int):      │
+             │       IComputerBuilder               │
+             │ + SetGPU(gpu: string):               │
+             │       IComputerBuilder               │
+             │ + EnableLiquidCooling():             │
+             │       IComputerBuilder               │
+             │ + EnableBluetooth():                 │
+             │       IComputerBuilder               │
+             │ + Build(): Computer                  │
+             └──────────────────△───────────────────┘
+                                │
+                                │ implements
+                                │
+             ┌──────────────────┴───────────────────┐
+             │           ComputerBuilder            │
+             │──────────────────────────────────────│
+             │ - _cpu: string                       │
+             │ - _ramInGb: int                      │
+             │ - _storageInGb: int                  │
+             │ - _gpu: string?                      │
+             │ - _hasLiquidCooling: bool            │
+             │ - _hasBluetooth: bool                │
+             │──────────────────────────────────────│
+             │ + SetCPU(cpu): IComputerBuilder      │
+             │ + SetRAM(ramInGb): IComputerBuilder  │
+             │ + SetStorage(storageInGb):           │
+             │       IComputerBuilder               │
+             │ + SetGPU(gpu): IComputerBuilder      │
+             │ + EnableLiquidCooling():             │
+             │       IComputerBuilder               │
+             │ + EnableBluetooth():                 │
+             │       IComputerBuilder               │
+             │ + Build(): Computer                  │
+             └──────────────────┬───────────────────┘
+                                │
+                                │ creates
+                                ▼
+             ┌──────────────────────────────────────┐
+             │               Computer               │
+             │              «Product»               │
+             │──────────────────────────────────────│
+             │ + CPU: string                        │
+             │ + RAMInGB: int                       │
+             │ + StorageInGB: int                   │
+             │ + GPU: string?                       │
+             │ + HasLiquidCooling: bool             │
+             │ + HasBluetooth: bool                 │
+             │──────────────────────────────────────│
+             │ + ToString(): string                 │
+             └──────────────────────────────────────┘
+
+
+             ┌──────────────────────────────────────┐
+             │          ComputerDirector            │
+             │              «Director»               │
+             │──────────────────────────────────────│
+             │ - _builder: IComputerBuilder         │
+             │──────────────────────────────────────│
+             │ + ComputerDirector(builder)          │
+             │ + ChangeBuilder(builder): void       │
+             │ + ConstructOfficePC(): Computer      │
+             │ + ConstructGamingPC(): Computer      │
+             │ + ConstructBudgetWorkstation():      │
+             │       Computer                        │
+             └──────────────────┬───────────────────┘
+                                │
+                                │ uses
+                                ▼
+                       IComputerBuilder
+
+
+             ┌──────────────────────────────────────┐
+             │               Program                │
+             │               «Client»               │
+             │──────────────────────────────────────│
+             │ + Main(): void                       │
+             └───────────────┬──────────────────────┘
+                             │
+                  ┌──────────┴──────────┐
+                  │                     │
+                uses                  creates
+                  │                     │
+                  ▼                     ▼
+        ComputerDirector       ComputerBuilder

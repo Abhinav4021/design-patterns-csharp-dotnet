@@ -1,0 +1,15 @@
+                    Program
+                       │
+              ┌────────┴────────┐
+              │                 │
+          uses Director      uses Builder
+              │                 │
+              ▼                 ▼
+     ComputerDirector     ComputerBuilder
+              │                 │
+              │                 │
+              ▼                 ▼
+     IComputerBuilder ────► Computer
+              ▲
+              │
+     ComputerBuilder
