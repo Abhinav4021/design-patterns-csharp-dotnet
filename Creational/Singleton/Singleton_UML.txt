@@ -1,0 +1,22 @@
+             ┌────────────────────────────┐
+             │          Singleton         │
+             │────────────────────────────│
+             │ - instance: Singleton      │
+             │      {static, private}     │
+             │────────────────────────────│
+             │ - Singleton()              │
+             │      {private}             │
+             │ + GetInstance(): Singleton │
+             │      {public, static}      │
+             │ + Operation(): void        │
+             └────────────────────────────┘
+                         ▲
+                         │
+                         │ returns same
+                         │ instance
+                         │
+             ┌───────────┴────────────┐
+             │         Client         │
+             │────────────────────────│
+             │ + Operation(): void    │
+             └────────────────────────┘

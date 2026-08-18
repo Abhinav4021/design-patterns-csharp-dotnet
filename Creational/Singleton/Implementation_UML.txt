@@ -1,0 +1,48 @@
+             ┌──────────────────────────────────────────────┐
+             │                  Singleton                   │
+             │                    «sealed»                  │
+             │──────────────────────────────────────────────│
+             │ - _instance: Lazy<Singleton>                 │
+             │      {static, readonly, private}             │
+             │──────────────────────────────────────────────│
+             │ - Singleton()                                │
+             │      {private}                               │
+             │──────────────────────────────────────────────│
+             │ + Instance: Singleton                        │
+             │      {static, public}                        │
+             │ + SessionId: Guid                            │
+             │      {public, get}                           │
+             │ + ExecuteTask(taskName: string): void        │
+             └──────────────────────┬───────────────────────┘
+                                    │
+                                    │ creates internally
+                                    │
+                                    ▼
+                         ┌──────────────────────┐
+                         │    Lazy<Singleton>   │
+                         │──────────────────────│
+                         │ Value                │
+                         │ → Singleton instance │
+                         └──────────────────────┘
+
+
+             ┌──────────────────────────────────────────────┐
+             │                   Program                    │
+             │                  «Client»                    │
+             │──────────────────────────────────────────────│
+             │ + Main(): void                               │
+             └──────────────────────┬───────────────────────┘
+                                    │
+                                    │ accesses
+                                    ▼
+                           Singleton.Instance
+                                    │
+                       ┌────────────┴────────────┐
+                       │                         │
+                       ▼                         ▼
+              ExecuteTask("Thread 1")   ExecuteTask("Thread 2")
+                       │                         │
+                       └────────────┬────────────┘
+                                    │
+                                    ▼
+                         Same Singleton object
