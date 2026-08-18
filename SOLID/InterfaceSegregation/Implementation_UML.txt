@@ -1,0 +1,43 @@
+                         ┌─────────────────────────┐
+                         │        IPrinter         │
+                         │       «interface»       │
+                         │─────────────────────────│
+                         │ + Print(document): void │
+                         └────────────△────────────┘
+                                      │
+                       ┌──────────────┴──────────────┐
+                       │                             │
+                       │ implements                  │ implements
+                       ▼                             ▼
+              ┌─────────────────┐        ┌──────────────────────────┐
+              │   BasicPrinter  │        │ EnterpriseMultiFunction  │
+              │─────────────────│        │         Printer          │
+              │ + Print()       │        │──────────────────────────│
+              └─────────────────┘        │ + Print()                │
+                                         │ + Scan()                 │
+                                         │ + PrintDoubleSided()     │
+                                         │ + Fax()                  │
+                                         └───────────┬──────────────┘
+                                                     │
+                           ┌─────────────────────────┼────────────────────┐
+                           │                         │                    │
+                           │ implements              │ implements         │ implements
+                           ▼                         ▼                    ▼
+              ┌─────────────────────┐   ┌─────────────────────┐ ┌─────────────────────┐
+              │      IScanner       │   │  IAdvancedPrinter   │ │       IFax          │
+              │     «interface»     │   │     «interface»     │ │     «interface»     │
+              │─────────────────────│   │─────────────────────│ │─────────────────────│
+              │ + Scan(document)    │   │ + PrintDoubleSided()│ │ + Fax(document,     │
+              │     : void          │   │       : void        │ │     number): void   │
+              └──────────△──────────┘   └──────────△──────────┘ └──────────△──────────┘
+                         │                         │                    │
+                         │ implements              │ implements         │ implements                       │                    │
+              ┌─────────────────────┐              │                    │
+              │    PhotoScanner     │              │                    │
+              │─────────────────────│              │                    │
+              │ + Scan(document)    │              │                    │
+              └─────────────────────┘              │                    │
+                                                   │                    │
+                                                   └──────────┬─────────┘
+                                                              │
+                                                EnterpriseMultiFunctionPrinter
