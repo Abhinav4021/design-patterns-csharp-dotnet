@@ -1,0 +1,28 @@
+┌───────────────────┐
+│   INotification   │
+│     Product       │
+└────────▲──────────┘
+         │
+         │
+┌────────┴──────────────┐
+│ EmailNotification     │
+│ SmsNotification       │
+│ Concrete Products     │
+└───────────────────────┘
+
+
+┌────────────────────────────┐
+│    NotificationCreator     │
+│         Creator            │
+├────────────────────────────┤
+│ CreateNotification()       │
+│ SendNotification()         │
+└─────────────▲──────────────┘
+              │
+       ┌──────┴───────────────┐
+       │                      │
+┌──────┴────────────┐ ┌──────-┴─────────────┐
+│EmailNotification  │ │SmsNotification      │
+│Creator            │ │Creator              │
+│Concrete Creator   │ │Concrete Creator     │
+└───────────────────┘ └─────────────────────┘ 
